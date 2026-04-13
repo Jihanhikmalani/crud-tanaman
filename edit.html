@@ -4,11 +4,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>ubah data tanaman</title>
+  
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div class="container">
+    <h1>form ubah tanaman</h1>
+    
+    <form id="formUbah">
+      <label>NamaTanaman</label>
+      <input type="text" id="namatanaman" />
+      
+      <label>warna</label>
+      <input type="text" id="warna" />
+      
+      <label>jenis</label>
+      <select id="jenis">
+       <option value="perdu">perdu</option>
+       <option value="kayu">kayu</option>
+       <option value="herbal">herbal</option>
+        
+      </select>
+      
+      
+      </select>
+      <button id="tombol" type="submit">simpan</button>
+      
+    </form>
+    <a href="daftar.html">dafta.tanaman</a>
+  </div>
   
+    <script type="module">
+    import { ambilDataTanaman, ubahDataTanaman } from './main.js'
+    
+    // mengambil id dari URL 
+    const urlParams = new URLSearchParams (window.location.search)
+    const idTanaman = urlParams.get('id')
+    console.log(idTanaman)
+    
+    // mengisi form dengan data siswa yang diambil dari Firestore
+    const tanaman = await ambilDataTanaman(idTanaman)
+    console.log(idTanaman)
+    
+    document.getElementById('namatanaman').value = tanaman.namaTanaman
+    document.getElementById('warna').value = tanaman.warna
+    document.getElementById('jenis').value =tanaman.jenis
+    
+    const formUbah = document.getElementById('formUbah')
+    
+    formUbah.addEventListener('submit', function (e) {
+      // mencegah reload halaman
+      e.preventDefault()
+    
+    const namaTanaman = document.getElementById('namatanaman').value
+    const warna = document.getElementById('warna').value
+    const jenis = document.getElementById('jenis').value
+    
+    // eksekusi fungsi ubah data siswa 
+    ubahDataTanaman(idTanaman, namaTanaman, warna, jenis)
+    })
+    </script>
 </body>
-
 </html>

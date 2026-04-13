@@ -130,7 +130,7 @@ export async function ambilDataTanaman(id) {
 // fungsi untuk mengubah data siswa
 export async function ubahDataTanaman(id, namaTanaman, warna, jenis) {
   await updateDoc(doc(db, "tanaman", id), {
-    namaTanaman: namatanaman,
+    namaTanaman: namaTanaman,
     warna: warna,
     jenis: jenis
   })
